@@ -18,16 +18,13 @@ An interactive Flask web app for sentiment and emotion analysis using pretrained
 - **Tokenizers**: NLTK tokenizers, Hugging Face tokenizers
 - **ML runtime**: PyTorch (torch, CPU wheels), NumPy
 - **Visualization**: wordcloud (image), matplotlib (dependency), Chart.js (charts)
-- **Packaging/Runtime**: Python 3.11, Gunicorn, Docker support
-
+- **Packaging/Runtime**: Python 3.11, Gunicorn
 ### Application structure
 ```
-upload/
+sentiment_analysis/
   app.py                     # Flask entrypoint and routes
   sentiment_model.py         # Preprocessing + model loading/inference
   requirements.txt           # Python dependencies (incl. spaCy model wheel)
-  Procfile                   # Gunicorn command
-  runtime.txt                # Python version (3.11)
   Dockerfile                 # (optional) containerization
   instance/
     sentiment_data.db        # SQLite DB (created at runtime if missing)
@@ -52,6 +49,7 @@ cd sentiment_analysis
 
 # (recommended) create and activate a virtual environment
 python -3.11 -m venv venv
+use  py -3.11 -m venv venv (if you have different versions)
 . venv/Scripts/activate  # Windows PowerShell: .venv\\Scripts\\Activate.ps1
 
 # install dependencies
