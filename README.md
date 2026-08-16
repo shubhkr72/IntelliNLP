@@ -1,18 +1,17 @@
 ## NLP Sentiment Analysis (Pretrained Models)
 
-An interactive Flask web app for sentiment and emotion analysis using pretrained Transformer models. It performs full NLP preprocessing (cleaning, tokenization, stemming, lemmatization, POS, NER), visualizes a word cloud, persists results in SQLite, and lets you download a detailed analysis report.
+An interactive Flask web app for sentiment and emotion analysis using pretrained Transformer models. It performs full NLP preprocessing (cleaning, tokenization, stemming, lemmatization, POS, NER), visualizes a word cloud, keeps the latest result available for download during the current app session, and lets you download a detailed analysis report.
 
 ### What it does
 - **Enter or upload text** and choose a model: default (DistilBERT SST-2), RoBERTa (Twitter), or Emotion (7 classes)
 - **Preprocess pipeline**: cleaning, normalization, tokenization, stemming, lemmatization, NER, POS
 - **Inference**: overall sentiment/emotion + per-word distribution
 - **Visualization**: word cloud generation
-- **Persistence**: results stored in `SQLite` via `SQLAlchemy`
 - **Export**: download a comprehensive TXT report
 
 ### Tech stack
 - **Frontend**: HTML, CSS (Bootstrap), JavaScript (Chart.js)
-- **Backend**: Flask, Flask-SQLAlchemy
+- **Backend**: Flask
 - **NLP**: spaCy, NLTK, Transformers
   - Models: DistilBERT SST-2, CardiffNLP Twitter RoBERTa, GoEmotions DistilRoBERTa
 - **Tokenizers**: NLTK tokenizers, Hugging Face tokenizers
@@ -26,8 +25,6 @@ sentiment_analysis/
   sentiment_model.py         # Preprocessing + model loading/inference
   requirements.txt           # Python dependencies (incl. spaCy model wheel)
   Dockerfile                 # (optional) containerization
-  instance/
-    sentiment_data.db        # SQLite DB (created at runtime if missing)
   templates/
     index.html               # Main UI
   static/                    # CSS, images, wordcloud output
@@ -67,7 +64,7 @@ python app.py
   - `default`: DistilBERT SST-2 (POSITIVE/NEGATIVE)
   - `roberta`: CardiffNLP Twitter RoBERTa (NEGATIVE/NEUTRAL/POSITIVE)
   - `emotion`: 7 emotions (ANGER, DISGUST, FEAR, JOY, NEUTRAL, SADNESS, SURPRISE)
-- The app generates `static/wordcloud.png` and stores analysis rows in SQLite
+- The app generates `static/wordcloud.png` and keeps the latest analysis in memory for report download
 
 ### Models
 - DistilBERT (SST-2): [distilbert-base-uncased-finetuned-sst-2-english](https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english)

@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template, make_response
-from flask_sqlalchemy import SQLAlchemy
 from sentiment_model import preprocess_text, analyze_sentiment, read_file
 from wordcloud import WordCloud
 import os
@@ -19,26 +18,6 @@ for pkg in ['punkt', 'punkt_tab', 'wordnet', 'averaged_perceptron_tagger']:
         pass
 
 app = Flask(__name__, static_folder='static')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sentiment_data.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-# Define SentimentRecord model
-class SentimentRecord(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    original_text = db.Column(db.Text, nullable=False)
-    cleaned_text = db.Column(db.Text, nullable=False)
-    removed_text = db.Column(db.Text, nullable=False)
-    normalized_text = db.Column(db.Text, nullable=False)
-    tokenized_text = db.Column(db.Text, nullable=False)
-    stemmed_text = db.Column(db.Text, nullable=False)
-    lemmatized_text = db.Column(db.Text, nullable=False)
-    sentiment = db.Column(db.String(20), nullable=False)
-    ner = db.Column(db.Text, nullable=False)
-    pos = db.Column(db.Text, nullable=False)
-
-with app.app_context():
-    db.create_all()
 
 # Global variables to store the analysis result
 analysis_result = {}

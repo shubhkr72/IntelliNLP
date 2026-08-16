@@ -70,9 +70,7 @@ flowchart TD
     A[app.py starts] --> B[Configure NLTK data directory]
     B --> C[Download or reuse NLTK packages]
     C --> D[Create Flask app]
-    D --> E[Configure SQLite with SQLAlchemy]
-    E --> F[Create SentimentRecord table]
-    F --> G[Load sentiment_model.py]
+    D --> G[Load sentiment_model.py]
     G --> H[Load spaCy en_core_web_md]
     H --> I[Preload Hugging Face pipelines]
 
@@ -130,16 +128,15 @@ flowchart TD
 
 | File | Responsibility |
 | --- | --- |
-| `app.py` | Flask routes, validation, word cloud generation, download response, database setup |
+| `app.py` | Flask routes, validation, word cloud generation, download response |
 | `sentiment_model.py` | spaCy and Transformer model loading, preprocessing, file reading, sentiment inference |
 | `templates/index.html` | Main page markup, Jinja rendering, results layout, embedded JSON for charts |
 | `static/index.js` | Form interactions, validation state, charts, copy/download/expand helpers |
 | `static/css/styles.css` | Application styling |
 | `static/wordcloud.png` | Generated word cloud output |
-| `instance/sentiment_data.db` | SQLite database file initialized by SQLAlchemy |
 
 ## Notes
 
-- The current code initializes a SQLite model/table, but the `/analyze` route stores the latest analysis in the global `analysis_result` variable for download instead of inserting records into the database.
+- The `/analyze` route stores the latest analysis in the global `analysis_result` variable for download during the current app session.
 - The `/download` route returns the most recent analysis result as `sentiment_analysis_result.txt`.
 - `static/wordcloud.png` is overwritten each time a new valid analysis runs.
