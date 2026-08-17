@@ -1,6 +1,6 @@
-## NLP Sentiment Analysis (Pretrained Models)
+## IntelliNLP AI Text Analysis (Pretrained Models)
 
-An interactive Flask web app for sentiment and emotion analysis using pretrained Transformer models. It performs full NLP preprocessing (cleaning, tokenization, stemming, lemmatization, POS, NER), visualizes a word cloud, keeps the latest result available for download during the current app session, and lets you download a detailed analysis report.
+An interactive Flask web app for text, sentiment and emotion analysis using pretrained Transformer models. It performs full NLP preprocessing (cleaning, tokenization, stemming, lemmatization, POS, NER), visualizes a word cloud, keeps the latest result available for download during the current app session, and lets you download a detailed analysis report.
 
 ### What it does
 - **Enter or upload text** and choose a model: default (DistilBERT SST-2), RoBERTa (Twitter), or Emotion (7 classes)
@@ -20,7 +20,7 @@ An interactive Flask web app for sentiment and emotion analysis using pretrained
 - **Packaging/Runtime**: Python 3.11, Gunicorn
 ### Application structure
 ```
-sentiment_analysis/
+IntelliNLP/
   app.py                     # Flask entrypoint and routes
   sentiment_model.py         # Preprocessing + model loading/inference
   requirements.txt           # Python dependencies (incl. spaCy model wheel)
@@ -41,13 +41,13 @@ Note: The repo installs `spaCy` and the `en_core_web_md` model from a wheel URL 
 
 ### Clone and run locally
 ```bash
-git clone https://github.com/shubhkr72/sentiment_analysis.git
-cd sentiment_analysis
+git clone https://github.com/shubhkr72/IntelliNLP.git
+cd IntelliNLP
 
 # (recommended) create and activate a virtual environment
-python -3.11 -m venv venv
-use  py -3.11 -m venv venv (if you have different versions)
-. venv/Scripts/activate  # Windows PowerShell: .venv\\Scripts\\Activate.ps1
+python -3.11 -m venv env
+use  py -3.11 -m venv env (if you have different versions)
+. env/Scripts/activate  # Windows PowerShell: .venv\\Scripts\\Activate.ps1
 
 # install dependencies
 pip install --upgrade pip
@@ -78,7 +78,7 @@ python app.py
 #### Deployed on Hugging Face
 The live demo is available here:
 
-`https://huggingface.co/spaces/sebrin7/sentiment-analysis`
+`https://huggingface.co/spaces/sebrin7/IntelliNLP`
 
 ### Environment and ports
 - Default port: `7860` (overridable via `PORT` env var)
